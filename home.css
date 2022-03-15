@@ -10,31 +10,19 @@
     text-transform: capitalize;
     transition: all 0.2s linear;
 }
-
-header{
-    position: fixed;
-    top:0; left:0; right:0;
-    background: #0058B7;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: var(--box-shadow);
+/* Boot Strap css */
+.navbar-custom .navbar-collapse, .navbar-default .navbar-form {
+    background: #003B7B;
 }
-header a{
-    text-decoration: none;
+.navbar-custom .navbar-brand{
     color:white;
-    cursor: pointer;
-    padding: 8px;
 }
-i{
+.navbar-collapse a{
+    color:white
+}
+.navbar-collapse ul li a:hover{
+    background: #011c38;
     color:white;
-    font-size: 24px;
-}
-header nav a:hover{
-    background:#003B7B;
-    border-radius: 5px;
 }
 .container{
     margin-top:60px;
@@ -113,4 +101,120 @@ ul li{
 center{
     font-size: 12px;
     color:rgb(139, 138, 138);
+}
+
+.login{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 0;
+    position:fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+.loginform a{
+    padding: 60px;
+    text-align: right;
+    text-decoration: none;
+    font-size: 36px;
+    color: red;
+    display: block;
+}
+.loginform form a{
+    color:white;
+    font-size: 14px;
+}
+.login a:hover, .login a:focus{
+    color:#f1f1f1;
+}
+.login .closebtn{
+    position:abosolute;
+    top:20px;
+    right:45px;
+    font-size: 60px;
+    
+}
+.login-container{
+    position: relative;
+    width:800px;
+    height:500px;
+    margin:30px;
+    background: white;
+}
+.loginbg{
+    position: absolute;
+    top:40px;
+    width:100%;
+    height:420px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background:#003B7B;
+}
+.loginbg .box{
+    position: relative;
+    width:50%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+.formbx{
+    position: absolute;
+    top:0;
+    left: 0;
+    width:50%;
+    height:100%;
+    background:white;
+    z-index: 1000;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+    transition: 0.2s;
+  
+}
+.formbx.active{
+    left:50%;
+}
+.formbx.active .signinform{
+    left:-100%;
+}
+.formbx .form{
+    position: absolute;
+    left:0;
+    width:100%;
+    padding:50px;
+    transition: 0.5s;
+}
+.formbx.active .signupform{
+    left:0;
+}
+.formbx .signupform{
+    left:100%;
+}
+.loginbg{
+    color:white;    
+}
+.signupBtn{
+    padding:8px;
+    background:#012041; 
+    border:1px solid white;
+    border-radius: 5px;
+}
+.box-signin{
+    padding:20px;
+}
+.signinBtn{
+    padding:8px;
+    background:#012041; 
+    border:1px solid white;
+    border-radius: 5px;
 }

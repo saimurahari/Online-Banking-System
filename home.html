@@ -8,17 +8,30 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='home.css'>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <header>
-        <a href="#" class="logo"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a>
-        <nav class="navbar">
-            <a href="#">Home</a>
-            <a href="#">About us</a>
-            <a href="#">Contact us</a>
-            <a href="#"><i class="fas fa-sign-in" aria-hidden="true"></i>&nbspLogin</a>
-        </nav>
-    </header>
+    <nav class="navbar-custom" role="navigation">
+        <a class="navbar-brand" href="#">TSM Banking</a>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact us</a></li>
+            <li><a href="#login" onclick = "openLogin()">login</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+
+      <!-- Home page -->
     <div class="container">
         <h1>Welcome to <b>TSM</b> Banking System!!😇</h1>
         <marquee direction = "left" direction="right" >
@@ -34,6 +47,80 @@
             </div>
         </div>
     </div>
+
+    <!-- Login Form -->
+    <div id="login" class="login">
+        <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+     <!-- <a href="#" class="closebtn" onclick="closeNav()">&times;</a> -->
+     <div class="login-container">
+         <div class="loginbg">
+            <div class="box-signin">
+                <h2>Already Have an account?</h2>
+                <button class="signinBtn">Sign In</button>
+            </div>
+            <div class="box signup">
+                <h2>Dont Have an account?</h2>
+                <button class="signupBtn">Sign Up</button>
+            </div>
+         </div>
+         <div class="formbx">
+             <div class="form signinform">
+                 <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                      </div>
+                      <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                      </div>
+                      <button type="submit" class="btn btn-primary" href="#">Submit</button>
+                 </form>
+                 </div>
+                 <div class="form signupform">
+                    <form>
+                        <div class="form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" class="form-control" id="fname" aria-describedby="emailHelp" placeholder="Enter First Name" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" class="form-control" id="lname" aria-describedby="emailHelp" placeholder="Enter Last Name" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email:</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Email" required>
+                            <br>
+                            <label for="dob">Date Of Birth</label>
+                            <input type="date" placeholder="dateofbirth">
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                            <br>
+                            <label for="mobile">Mobile:</label>
+                            <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile Number" required>
+                          </div>
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Signup</label>
+                          </div>
+                          <button type="submit" class="btn btn-primary" href="#">Submit</button>
+                        
+                    </form>
+                    </div>
+         </div>
+     </div>
+    </div>
+
+
+
+    <!-- Footer -->
     <footer>
         <div class="footer">
             <div class="foot-container">
@@ -94,7 +181,9 @@
         <center>
         <span>TSMbanking ®</span>
     </center>
-    </footer>
+    </footer>  
+<script src = "./banking.js">
+</script>
     
 </body>
 </html>
