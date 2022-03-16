@@ -1,3 +1,11 @@
+function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
 function openLogin(){
     document.getElementById("login").style.width="100%";
 }
@@ -14,4 +22,13 @@ signinBtn.onclick = function(){
 }
 signupBtn.onclick = function(){
     formbx.classList.add('active')
+}
+function barFunction(){
+    var x = document.getElementById('topnav');
+    if(x.className == "navbar-custom"){
+        x.className+="responsive";
+
+    }else{
+        x.className="navbar-custom";
+    }
 }
