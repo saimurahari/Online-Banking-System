@@ -1,0 +1,19 @@
+body{
+    font-family: Poppins;
+}
+.formgroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.formbx{
+    display:flex;  
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+}
+.formbx form{
+    width:100%;
+}
+

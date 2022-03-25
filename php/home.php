@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+        header("location: login.php");
+        exit;
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +25,7 @@
 
 </head>
 <body>
+    
     <header>
         
         <div class="topnav" id="myTopnav">
@@ -60,77 +68,6 @@
         </div>
     </section>
       
-
-
-    <!-- Login Form -->
-    <div id="login" class="login">
-        <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
-     <div class="login-container">
-         <div class="loginbg">
-            <div class="box-signin">
-                <h2>Already Have an account?</h2>
-                <button class="signinBtn">Sign In</button>
-            </div>
-            <div class="box signup">
-                <h2>Dont Have an account?</h2>
-                <button class="signupBtn">Sign Up</button>
-            </div>
-         </div>
-         <div class="formbx">
-             <div class="form signinform">
-                 <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-                      </div>
-                      <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-                        <label class="form-check-label" for="exampleCheck1">Remember me</label>
-                      </div>
-                      <button type="submit" class="btn btn-primary" href="#">Submit</button>
-                 </form>
-                 </div>
-                 <div class="form signupform">
-                    <form>
-                        <div class="form-group">
-                            <label for="fname">First Name:</label>
-                            <input type="text" class="form-control" id="fname" aria-describedby="emailHelp" placeholder="Enter First Name" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="lname">Last Name:</label>
-                            <input type="text" class="form-control" id="lname" aria-describedby="emailHelp" placeholder="Enter Last Name" required>
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Email:</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your Email" required>
-                            <br>
-                            <label for="dob">Date Of Birth</label>
-                            <input type="date" placeholder="dateofbirth">
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
-                            <br>
-                            <label for="mobile">Mobile:</label>
-                            <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile Number" required>
-                          </div>
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Signup</label>
-                          </div>
-                          <button type="submit" class="btn btn-primary" href="#">Submit</button>
-                        
-                    </form>
-                    </div>
-         </div>
-     </div>
-    </div>
-
 
 
     <!-- Footer -->
