@@ -13,7 +13,7 @@
     <title>TSM Banking</title>
     <link rel="icon" href="./Images/icon.ico" type="image/icon type">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='home.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href="home2.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -30,7 +30,8 @@
         
         <div class="topnav" id="myTopnav">
             <a href="#" class="company"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a> 
-            <a href="#login" onclick="openLogin()">Login</a>
+            <a href="./logout.php">Logout</a>
+            <a href="./login.php"><?php echo $_SESSION['email'];?></a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="#home" class="active">Home</a>
@@ -59,6 +60,11 @@
                 <i class="bi bi-credit-card"></i>
                 <i class="fa fa-google-wallet" aria-hidden="true"></i>  
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
+            <div class="bankingoptions">
+                <a href="#">New Account</a>
+                <a href="#">Login Net banking</a>
+
             </div>
 
         </div>

@@ -36,12 +36,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel='stylesheet' type='text/css' media='screen' href='login.css'>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
 
     <title>Login</title>
   </head>
@@ -64,24 +67,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div> ';
     }
     ?>
-
+    <header>
     <div class="container my-4">
-     <h1 class="text-center">Login to our website</h1>
-     <form action="login.php" method="post">
+     <h1 class="text-center">Login</h1>
+     <form class="myform" action="login.php" method="post">
         <div class="form-group">
-            <label for="email" name = "email">email</label>
+            <label for="email" name = "email">Email</label>
             <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp">
             
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password">
-        </div>
-       
-         
+        <div class="btn">         
         <button type="submit" class="btn btn-primary">Login</button>
+        <a class="btn btn-primary" href="./signup.php">Signup here</a>
+        </div>
+
+        </div>
      </form>
     </div>
+    </header>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
