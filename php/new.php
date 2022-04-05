@@ -1,36 +1,41 @@
 <?php
-if (isset($_POST['submit'])) {
+    session_start();
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
+        header("location: login.php");
+        exit;
+    }
+?>
+<?php
 
-    include 'connection.php';
-    $email = $_POST["email"];
-    $fullname = $_POST["fullname"];
-    $dob = $_POST["dob"];
-    $fathername = $_POST["fathername"];
-    $account = $_POST["account"];
-	$filename = $_FILES["uploadfile"]["name"];
-	$tempname = $_FILES["uploadfile"]["tmp_name"];	
-	$folder = "./uploadimages/".$filename;
-    function UserID()
-        {
-        $starting_digit=5;
-        $first_part1=rand(0,99);
-        if(strlen($first_part1)==1) { $first_part="0".$first_part1; } else { $first_part=$first_part1; }
-        $second_part1=rand(1,999);
-        if(strlen($second_part1)==1) { $second_part="00".$second_part1; } elseif(strlen($second_part1)==2) { $second_part="0".$second_part1; } else { $second_part=$second_part1; }
-        $third_part1=rand(1,9999);
-        if(strlen($third_part1)==1) { $third_part="000".$third_part1; } elseif(strlen($third_part1)==2) { $third_part="00".$third_part1; } elseif(strlen($third_part1)==3) { $third_part="0".$third_part1; } else { $third_part=$third_part1; }
-        $userid=$starting_digit.$first_part."-".$second_part."-".$third_part;
-        return $userid;
-        }
-        $code = UserID();
+    if(isset($_POST['submit'])){
         
-		
-		// Get all the submitted data from the form
-        $sql = "INSERT INTO accountdetails (email,fullname,dob,fathername,adhar,accountnum) VALUES ('$email','$fullname','$dob','$fathername','$filename','$account')";
-		// Execute query
-      
-		mysqli_query($conn, $sql);
-       
+        include 'connection.php';
+        $email = $_POST["email"];
+        $fullname = $_POST["fullname"];
+        $dob = $_POST["dob"];
+        $mobile = $_POST["mobile"];
+        $surname = $_POST["surname"];
+        $accountnum = $_POST["acc"];
+        $mpin = $_POST["mpin"];
+        $filename = $_FILES["uploadfile"]['name'];
+        $tempname = $_FILES["uploadfile"]["tmp_name"];
+        $folder = "./uploadimages/".$filename;
+        
+
+        $existSql = "SELECT * FROM `accountdetails` WHERE `email`='$email' OR `mobile` = '$mobile'";
+        $result = mysqli_query($conn, $existSql);
+        $numExistRows = mysqli_num_rows($result);
+        if($numExistRows>0){
+            // $exists = true;
+            $showError = "Email/Mobile Already Exists";
+            echo "<script type='text/javascript'>alert('$showError');</script>";
+            
+        }
+        else{
+        $sql = "INSERT INTO accountdetails (email,fullname,surname,accountnum,mobile,dob,adhar,mpin) VALUES ('$email','$fullname','$surname','$accountnum','$mobile','$dob','$filename','$mpin')";
+
+        mysqli_query($conn, $sql);
+        }
 		// Now let's move the uploaded image into the folder: image
 		if (move_uploaded_file($tempname, $folder)) {
 			$msg = "Image uploaded successfully";
@@ -38,79 +43,116 @@ if (isset($_POST['submit'])) {
 		}else{
 			$msg = "Failed to upload image";
 	}
-}
+        
+    }
+
 
 ?>
-
-
+<?php
+$showAlert = false;
+$showError = false;
+$exists= false;
+    
+    if($showAlert) {
+    
+        echo ' <div class="alert alert-success 
+            alert-dismissible fade show" role="alert">
+    
+            <strong>Success!</strong> Your account is 
+            now created and you can login. 
+            <button type="button" class="close"
+                data-dismiss="alert" aria-label="Close"> 
+                <span aria-hidden="true">×</span> 
+            </button> 
+        </div> '; 
+    }
+        
+    if($exists) {
+        echo ' <div class="alert alert-danger 
+            alert-dismissible fade show" role="alert">
+    
+        <strong>Error!</strong> '. $exists.'
+        <button type="button" class="close" 
+            data-dismiss="alert" aria-label="Close"> 
+            <span aria-hidden="true">×</span> 
+        </button>
+       </div> '; 
+     }
+   
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>TSM Banking</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='newaccount.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='new.css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-    
-    
-
 </head>
 <body>
-    <header>
-        <section>
-            <div class="bc-banner">
-            <img src="./Images/new_banner.png" class="bc-banner-cover img-responsive">
-            <div class="centered"><h1>Open a new banking account and get 500 Rs Free!!</h1></div>
-            </div>
-            <div class="formcontainer">
-
-            <div class="container">
-            <form method="POST" enctype = "multipart/form-data" onsubmit="alert('your Customer Id is <?php echo $activationcode ?>');">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>   
-                    <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Full name</label>
-                    <input type="text" name = "fullname" class="form-control" id="exampleInputPassword1" placeholder="Full Name">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Date of Birth</label>
-                    <input type="date" name = "dob" class="form-control" id="exampleInputPassword1" placeholder="Date of birth">
-                </div>
-                
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Father name</label>
-                    <input type="text" name = "fathername" class="form-control" id="exampleInputPassword1" placeholder="Father Name">
-                </div>
-               
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Account Number</label>
-                    <input type="text" name ="account" class="form-control" id="exampleInputPassword1" value="<?php echo "$code" ?>">
-                </div>  
-                
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Adhar Proof</label>
-                    <input type="file" name = "uploadfile" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit"  name ="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-   
-                
-            </div>
-           
-        </section>
+<header>
+        
+        <div class="topnav" id="myTopnav">
+            <a href="#" class="company"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a> 
+            <a href="./logout.php">Logout</a>
+            <a href="./login.php"><?php echo $_SESSION['email'];?></a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="./home.php" class="active">Home</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+              <i class="fa fa-bars"></i>
+            </a>
+          </div>
     </header>
+
+<section>
+    <div class="container">
+    <h3>Open a new Bank Account</h3>
+        <div class="formcontainer">
+            
+        <form  method="POST" enctype = "multipart/form-data">
+            <div class="form-group">
+            <label>Full Name:</label><br>
+            <input type="text" name="fullname" required>
+            </div>
+            <div class="form-group">
+            <label>Surname:</label><br>
+            <input type="text" name="surname" required>
+            </div>
+            <div class="form-group">
+            <label>Email:</label><br>
+            <input type="email" name= "email" required>
+            </div>
+            <div class="form-group">
+            <label>Date Of Birth:</label><br>
+            <input type="date" name= "dob">
+            </div>
+            <div class="form-group">
+            <label>Mobile No:</label><br>
+            <input type="text" name="mobile" required>
+            </div>
+            <div class="form-group">
+            <label>Account Number:</label><br>
+            <input type="text" name ="acc" value="<?php echo rand(100000000,999999999)?>" readonly>
+            <small>Please note your Account Number. This is not editable</small>
+            </div>
+            <div class="form-group">
+            <label>Adhar Proof</label><br>
+            <input type="file" name = "uploadfile" required>
+            </div>
+            <div class="form-group">
+            <label>MPIN</label><br>
+            <input type="password" name = "mpin" minlength="6" maxlength="6" required>
+            <small>Enter 6 digit MPIN</small>
+            </div>
+            <button type="submit" class="btn btn-success" name="submit">Submit</button>
+        </form>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>

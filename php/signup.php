@@ -18,6 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if($numExistRows > 0){
         // $exists = true;
         $showError = "Username Already Exists";
+        
     }
     else{
         // $exists = false; 

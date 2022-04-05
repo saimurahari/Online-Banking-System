@@ -62,7 +62,7 @@
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
             </div>
             <div class="bankingoptions">
-                <a href="#">New Account</a>
+                <a href="./new.php">New Account</a>
                 <a href="#">Login Net banking</a>
 
             </div>
