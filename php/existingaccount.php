@@ -12,6 +12,7 @@ if(isset($_POST['submit'])){
 $accountnum = $_POST["accountnum"];
 $mpin = $_POST["mpin"];
 
+
 $sql = "SELECT * FROM accountdetails WHERE accountnum = '$accountnum' AND MPIN = '$mpin'";
 $result = mysqli_query($conn, $sql);
 $num = mysqli_num_rows($result);
@@ -20,6 +21,7 @@ if($num > 0)
     session_start();
     $_SESSION['accloggedin'] = true;
     $_SESSION['accountnum'] = $accountnum;
+    
     header("location:customerlog.php");
    }
 else

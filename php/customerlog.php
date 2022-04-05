@@ -1,11 +1,22 @@
 <?php
     session_start();
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
-        header("location: existingaccount.php");
+        header("location: login.php");
         exit;
     }
     
 ?>
+<?php
+include "connection.php";
+
+    $sql = mysqli_query($conn, "SELECT * FROM accountdetails WHERE accountnum='$_SESSION[accountnum]';");
+    $sql2 = mysqli_query($conn,"SELECT * FROM account WHERE accountnum='$_SESSION[accountnum]';");
+?>
+<?php
+  $row = mysqli_fetch_assoc($sql);
+  $row2 = mysqli_fetch_assoc($sql2);
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +38,8 @@
         
         <div class="topnav" id="myTopnav">
             <a href="#" class="company"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a> 
-            <a href="./logout.php">Logout</a>
-            <a href="./login.php"><?php echo $_SESSION['email'];?></a>
+            
+            <a href="./home.php"><?php echo $_SESSION['email'];?></a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
             <a href="./home.php" class="active">Home</a>
@@ -37,9 +48,67 @@
             </a>
         </div>
 </header>
+<div class="profile">
+  <div class="profilecontainer">
+    <h3>Welcome to <?php echo $row['fullname'];?>!!</h3>
+ 
+    <div class="profileimg">
+      <?php  
+      echo "<img src = './uploadimages/".$row['profile']."'>";
+    ?>
+    
+    <a href="./logout.php">Logout</a>
+    
+    </div>
+    <div class="aware">
+    <marquee direction="left">Avoid using public computers or public wireless access points for online banking and other activities involving sensitive information when possible.
+Always “sign out” or “log off” of password protected websites when finished to prevent unauthorized access.  Simply closing the browser window may not actually end your session.</marquee>
+</div>
+    <div>
+      <nav class="usernav">
+        <a href="#">My Profile</a>
+        <a href="#">My Account</a>
+        <a href="#">Fund Transfer</a>
+        <a href="#">Check Balance</a>
+        <a href="#">Check Statement</a>
+        <a href="logout.php"><i class="fa fa-power-off"></i></a>
+      </nav>
+    </div>
+  </div>
+  </div>
+<div class="formcontainer">
+  <div class="detailform">
+    <center>
+    <h3>Account Details</h3>
+    </center>
+    <div class="details">
+      <a>Account Number: <?php  echo $row['accountnum']?></a>
+      <a>Customer Name: <?php  echo $row['fullname']."  ".$row['surname']?></a>
+      <a>Email: <?php  echo $row['email']?></a>
+      <a>Mobile number: <?php  echo $row['mobile']?></a>
+      <a>Date of Birth: <?php  echo $row['dob']?></a>
+      <a>Account Type: Savings</a>
+    </div>
+  </div>
+  <div class="formcont">
+    <center>
+    <h3>Balance Amount</h3>
+    </center>
+    <div class="balanceamount">
+      <a>Account Number:&nbsp;&nbsp;<?php  echo $row['accountnum']?><br>
+      Balance amount: &nbsp;&nbsp;<?php echo $row2['balance']?>
+    </a>
+    </div>
 
+  </div>
+</div>
+  
+
+
+
+
+</body>
 <script src = "./banking.js">
 </script>
 
-</body>
 </html>

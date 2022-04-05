@@ -20,6 +20,8 @@
         $filename = $_FILES["uploadfile"]['name'];
         $tempname = $_FILES["uploadfile"]["tmp_name"];
         $folder = "./uploadimages/".$filename;
+
+        $balance = $_POST['opbalance'];
         
 
         $existSql = "SELECT * FROM `accountdetails` WHERE `email`='$email' OR `mobile` = '$mobile'";
@@ -32,9 +34,12 @@
             
         }
         else{
-        $sql = "INSERT INTO accountdetails (email,fullname,surname,accountnum,mobile,dob,adhar,mpin) VALUES ('$email','$fullname','$surname','$accountnum','$mobile','$dob','$filename','$mpin')";
-
+        $sql = "INSERT INTO accountdetails (email,fullname,surname,accountnum,mobile,dob,profile,mpin) VALUES ('$email','$fullname','$surname','$accountnum','$mobile','$dob','$filename','$mpin')";
+        
+        $sql2 = "INSERT INTO account (fullname,accountnum,balance) VALUES ('$fullname','$accountnum','$balance')";
         mysqli_query($conn, $sql);
+        mysqli_query($conn, $sql2);
+        $_SESSION['fullname'] = $fullname;
         }
 		// Now let's move the uploaded image into the folder: image
 		if (move_uploaded_file($tempname, $folder)) {
@@ -135,14 +140,19 @@ $exists= false;
             <input type="text" name="mobile" required>
             </div>
             <div class="form-group">
+            <label>Open Balance:</label><br>
+            <input type="text" name="opbalance" required>
+            </div>
+            <div class="form-group">
             <label>Account Number:</label><br>
             <input type="text" name ="acc" value="<?php echo rand(100000000,999999999)?>" readonly>
             <small>Please note your Account Number. This is not editable</small>
             </div>
             <div class="form-group">
-            <label>Adhar Proof</label><br>
+            <label>Profile Photo</label><br>
             <input type="file" name = "uploadfile" required>
             </div>
+            
             <div class="form-group">
             <label>MPIN</label><br>
             <input type="password" name = "mpin" minlength="6" maxlength="6" required>
