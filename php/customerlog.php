@@ -96,8 +96,20 @@ Always “sign out” or “log off” of password protected websites when finis
     </center>
     <div class="balanceamount">
       <a>Account Number:&nbsp;&nbsp;<?php  echo $row['accountnum']?><br>
-      Balance amount: &nbsp;&nbsp;<?php echo $row2['balance']?>
+      Balance amount: &nbsp;&nbsp;INR <?php echo $row2['balance']?>
     </a>
+    <a onclick="alert('This feature is currently under process we will update soon!')">Add Amount at your nearby centers</a>
+    
+    </div>
+    <div class="social">
+      <center>
+      <a href="#" class="fa fa-facebook"></a>
+<a href="#" class="fa fa-twitter"></a>
+<a href="#" class="fa fa-google"></a>
+<a href="#" class="fa fa-linkedin"></a>
+<a href="#" class="fa fa-youtube"></a>
+<a href="#" class="fa fa-instagram"></a>
+    </center>
     </div>
 
   </div>

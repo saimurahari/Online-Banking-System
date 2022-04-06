@@ -140,6 +140,17 @@
   cursor: pointer;
   
 }
+.social{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.social .fa fa-facebook{
+  padding:5px;
+  background-color: red;
+
+}
+
 
 
 
