@@ -12,11 +12,14 @@ include "connection.php";
     $sql = mysqli_query($conn, "SELECT * FROM accountdetails WHERE accountnum='$_SESSION[accountnum]';");
     $sql2 = mysqli_query($conn,"SELECT * FROM account WHERE accountnum='$_SESSION[accountnum]';");
     $sql3 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
+    $sql4 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
+
 ?>
 <?php
   $row = mysqli_fetch_assoc($sql);
   $row2 = mysqli_fetch_assoc($sql2);
   $row3 = mysqli_fetch_assoc($sql3);
+  
 
 ?>
 
@@ -102,17 +105,39 @@ Always “sign out” or “log off” of password protected websites when finis
     <div class="detailform">
     <center>
     <h3>Benificiary Details</h3>
-    <small>Benificiary <?php  echo $row3['fullname']?></small>
-    </center>
-    <div class="details">
-      <a>Account Number: <?php  echo $row3['accountnum']?></a>
-      <a>Customer Name: <?php  echo $row3['fullname']?></a>
-      <a>Email: <?php  echo $row3['email']?></a>
-      <a>Mobile number: <?php  echo $row3['mobile']?></a>
-      <a>Account Type: Savings</a>
+    
+<div class="table">
+    <table border="2px">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Account Number</th>
+            <th>Bankname</th>
+            <th>IFSC</th>
+        </tr>
+        <?php
+        while($row4 = mysqli_fetch_assoc($sql4)){
+?>
+        <tr>
+
+            <td><?php echo $row4['fullname']?></td>
+            <td><?php echo $row4['email']?></td>
+            <td><?php echo $row4['mobile']?></td>
+            <td><?php echo $row4['accountnum']?></td>
+            <td><?php echo $row4['bankname']?></td>
+            <td><?php echo $row4['ifsc']?></td>
+        </tr>
+        <?php
+        }
+        ?>
+       
+
+
+
+    </table>
     </div>
 
-    
   </div>
   </div>
 

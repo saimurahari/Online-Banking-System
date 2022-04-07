@@ -129,7 +129,7 @@
 .detailform{
   border:4px solid #5d5c5c;
   border-radius: 4px;
-  width:30%;
+  width:50%;
   margin-top:40px;
   background-color: #d2d2d2;
 }
@@ -204,6 +204,19 @@
   border-radius: 4px;
   padding:8px;
   margin-bottom: 4px;
+}
+table tr{
+  background-color:white;
+}
+table tr th{
+  text-align: center;
+  padding : 8px;
+  background:white;
+}
+table tr td{
+  padding : 10px;
+  background:white;
+  text-align: center;
 }
 
 

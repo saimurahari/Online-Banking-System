@@ -78,7 +78,7 @@ if(isset($_POST['submit'])){
     <h3>Add Benificiary</h3>
         <div class="formcontainer">
             
-        <form  method="POST" enctype = "multipart/form-data">
+        <form  method="POST" enctype = "multipart/form-data" action="./benificiary.php">
             <div class="form-group">
             <label>Full Name:</label><br>
             <input type="text" name="fullname" required>
