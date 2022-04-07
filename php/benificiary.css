@@ -38,14 +38,17 @@
 .topnav .icon {
   display: none;
 }
-.profilecontainer h3{
-  margin-top:3px;
-  margin-left:10px;
-  padding-left:4px;
+.profileimg{
+  height:30px;
+}
+.profileimg h3{
   background-color: #08c5ef;
   color:black;
   border-left: 8px solid #003B7B;
   display:flex;
+  margin-left: 10px;
+  text-shadow: 0 0 3px #FF0000, 0 0 5px white;
+  
   
 }
 
@@ -53,29 +56,42 @@
   background-color: #5a7a95;
   height:100px;
   top: 0;
+  
+}
+.profileimg{
   display:flex;
 }
-.profileimg a{
-  background-color:rgb(21, 21, 106);
-  padding: 6px;
-  color:white;
-  border-radius: 4px;
-}
 
-.profileimg a:hover{
-  color:white;
-  text-decoration: none;
-}
 .profileimg img{
   border:10px solid black;
   height:200px;
-  width: 290px;
+  width: 230px;
   margin-left: 10px;
-
+}
+.head{
+  margin-left: 250px;
+  text-align: center;
+}
+.head h3{
+  background-color: rgb(7, 171, 78);
+  width:15%;
+  color:white;
+  border:2px solid black;
+  padding:5px;
+  border-radius: 8px;
+  -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow: inset 0 0 10px #000000;
+   text-shadow: 0 0 3px #000000, 0 0 5px rgb(0, 0, 0);
+   
+}
+.navform{
+  margin-top: 60px;
 }
 .usernav{
   background-color: #003B7B;
   padding: 8px;
+  
 }
 .usernav a{
   color:white;
@@ -89,16 +105,32 @@
   background-color: #023266;
   text-decoration: none;
 }
+.formcontainer{
+    display:flex;
+    justify-content: center;
+    margin-top:180px;
+}
+.formcontainer a{
+    background-color: #003B7B;
+    color:white;
+    padding: 8px;
+    border-radius: 5px;
+    border:none;
+}
+.formcontainer a:hover{
+    text-decoration: none;
+    color:white;
+}
+.centerben{
+    display:flex;
+    justify-content: center;
+
+}
 .detailform{
-  float:left;
   border:4px solid #5d5c5c;
   border-radius: 4px;
   width:30%;
-  margin-top: 220px;
-  margin-left: 20px;
-  display: block;
-  justify-content: center;
-  align-items: center;
+  margin-top:40px;
   background-color: #d2d2d2;
 }
 .details a{
@@ -118,11 +150,11 @@
 .formcont{
   float:left;
   margin-top: 220px;
-  margin-left: 50px;
+  margin-left: 30px;
   border:4px solid #5d5c5c;
   background-color: #d2d2d2;
   height:350px;
-  width:50%;
+  width:45%;
 
 }
 .balanceamount a{
@@ -138,20 +170,41 @@
 .balanceamount a:hover{
   text-decoration: none;
   cursor: pointer;
-  
 }
-.social{
-  display:flex;
+.social i{
+  font-size: 30px;
+  color:black;
+}
+.formloan{
+  float:right;
+  border:4px solid #5d5c5c;
+  border-radius: 4px;
+  width:20%;
+  margin-top:220px;
+  
+  display: block;
   justify-content: center;
   align-items: center;
+  background-color: #d2d2d2;
 }
-.social .fa fa-facebook{
-  padding:5px;
-  background-color: red;
-
+.customerservice a{
+  background-color: white;
+  display:flex;
+  justify-content: center;
+  margin:10px;
+  padding:7px;
+  border: 2px solid #817e7e;
+  border-radius: 10px;
+  
 }
-
-
+.customerservice button{
+  background-color: #003B7B;
+  color:white;
+  border: none;
+  border-radius: 4px;
+  padding:8px;
+  margin-bottom: 4px;
+}
 
 
 /* media queries */
