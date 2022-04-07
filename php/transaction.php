@@ -7,21 +7,18 @@
     
 ?>
 <?php
-include "connection.php";
-
-    $sql = mysqli_query($conn, "SELECT * FROM accountdetails WHERE accountnum='$_SESSION[accountnum]';");
-    $sql2 = mysqli_query($conn,"SELECT * FROM account WHERE accountnum='$_SESSION[accountnum]';");
-    $sql3 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
-    $sql4 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
-
+include 'connection.php';
+$sql = mysqli_query($conn, "SELECT * FROM accountdetails WHERE accountnum='$_SESSION[accountnum]';");
+$sql2 = mysqli_query($conn,"SELECT * FROM account WHERE accountnum='$_SESSION[accountnum]';");
+$sql3 = mysqli_query($conn, "SELECT * FROM transaction WHERE holderaccountnum='$_SESSION[accountnum]';");
+$sql4 = mysqli_query($conn, "SELECT * FROM transaction1 WHERE accountholder='$_SESSION[accountnum]';");
 ?>
 <?php
   $row = mysqli_fetch_assoc($sql);
   $row2 = mysqli_fetch_assoc($sql2);
-  $row3 = mysqli_fetch_assoc($sql3);
-  
 
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +27,7 @@ include "connection.php";
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>TSM Banking</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='benificiary.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='transaction.css'>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -72,8 +69,6 @@ include "connection.php";
  
     </div>
 
-    
-    
     <div class="aware">
     
     <div class="navform">
@@ -83,71 +78,89 @@ Always “sign out” or “log off” of password protected websites when finis
       <nav class="usernav">
       
         <a href="./customerlog.php">My Profile</a>
-        <a href="./customerlog.php">My Account</a>
         <a href="./transfer.php">Fund Transfer</a>
         <a href="./benificiary.php">Benificiary</a>
-        <a href="#" onclick="alert('This feature is currently under process we will update soon!')">Add Fund</a>
+        <a href="#"onclick="alert('This feature is currently under process we will update soon!')>Add Fund</a>
         <a href="./customerlog.php">Check Balance</a>
         <a href="#">Check Statement</a>
         <a href="logout.php"><i class="fa fa-power-off"></i></a>
       </nav>
     </div>
   </div>
-  </div>
 <div class="formcontainer">
-    <center>
-        
-    <h3>Benificiary</h3>
-    <a href="./addbenificiary.php">Add New Benificiary</a>
-    </center>
-    </div>
-    <div class="centerben">
-    <div class="detailform">
-    <center>
-    <h3>Benificiary Details</h3>
-    
+    <h3>Statement</h3>
+</div>
+<center>
 <div class="table">
-    <table border="2px">
+    <table border="2px" id="exportpdf">
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
+            <th>Account holder</th>
+            <th>Date</th>
+            <th>Credit</th>
+            <th>Debit</th>
+            
             <th>Account Number</th>
-            <th>Bankname</th>
-            <th>IFSC</th>
         </tr>
+        
         <?php
-        while($row4 = mysqli_fetch_assoc($sql4)){
+        while($row3 = mysqli_fetch_assoc($sql3))
+        {
 ?>
         <tr>
 
-            <td><?php echo $row4['fullname']?></td>
-            <td><?php echo $row4['email']?></td>
-            <td><?php echo $row4['mobile']?></td>
-            <td><?php echo $row4['accountnum']?></td>
-            <td><?php echo $row4['bankname']?></td>
-            <td><?php echo $row4['ifsc']?></td>
+            <td><?php echo $row3['holderaccountnum']?></td>
+            <td><?php echo $row3['date']?></td>
+            <td><?php echo $row3['credit']?></td>
+            <td><?php echo $row3['debit']?></td>
+            <td><?php echo $row3['accountnum']?></td>
+            
         </tr>
+        
         <?php
         }
         ?>
-       
-
-
-
+        <?php
+        while($row4 = mysqli_fetch_assoc($sql4))
+        {
+?>
+        <tr>
+            <td><?php echo $row4['accountholder']?></td>
+            <td><?php echo $row4['date']?></td>
+            <td><?php echo $row4['credit']?></td>
+            <td><?php echo $row4['debit']?></td>
+            <td><?php echo $row4['accountnum']?></td>
+            
+            
+        </tr>
+        
+        <?php
+        }
+        ?>
+        
     </table>
-    </div>
-
+    <input type="button" id="btnExport" value="Export" onclick="Export()" />
+</div>
+</center>
   </div>
-  </div>
-
-  
-
-
-
 
 </body>
-<script src = "./banking.js">
-</script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script type="text/javascript">
+        function Export() {
+            html2canvas(document.getElementById('exportpdf'), {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width:500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download("<?php echo $_SESSION['accountnum']?>.pdf");
+                }
+            });
+        }
+    </script>
 </html>

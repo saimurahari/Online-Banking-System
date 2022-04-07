@@ -11,10 +11,17 @@ include "connection.php";
 
     $sql = mysqli_query($conn, "SELECT * FROM accountdetails WHERE accountnum='$_SESSION[accountnum]';");
     $sql2 = mysqli_query($conn,"SELECT * FROM account WHERE accountnum='$_SESSION[accountnum]';");
+    $sql3 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
+    $sql4 = mysqli_query($conn,"SELECT * FROM benificiary WHERE holderaccountnum='$_SESSION[accountnum]';");
+
 ?>
 <?php
   $row = mysqli_fetch_assoc($sql);
   $row2 = mysqli_fetch_assoc($sql2);
+  $row3 = mysqli_fetch_assoc($sql3);
+
+  
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +31,7 @@ include "connection.php";
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>TSM Banking</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='customer.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='fundtransfer.css'>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -65,7 +72,7 @@ include "connection.php";
     <h3>Balance amount:<br>INR <?php echo $row2['balance']?></h3>
  
     </div>
-    
+
     
     
     <div class="aware">
@@ -76,75 +83,61 @@ Always “sign out” or “log off” of password protected websites when finis
 </div>
       <nav class="usernav">
       
-        <a href="#">My Profile</a>
-        <a href="#">My Account</a>
+        <a href="./customerlog.php">My Profile</a>
+        <a href="./customerlog.php">My Account</a>
         <a href="./transfer.php">Fund Transfer</a>
         <a href="./benificiary.php">Benificiary</a>
         <a href="#" onclick="alert('This feature is currently under process we will update soon!')">Add Fund</a>
-        <a href="#">Check Balance</a>
-        <a href="./transaction.php">Check Statement</a>
+        <a href="./customerlog.php">Check Balance</a>
+        <a href="#">Check Statement</a>
         <a href="logout.php"><i class="fa fa-power-off"></i></a>
       </nav>
     </div>
   </div>
   </div>
-<div class="formcontainer">
-  <div class="detailform">
-    <center>
-    <h3>Account Details</h3>
-    </center>
-    <div class="details">
-      <a>Account Number: <?php  echo $row['accountnum']?></a>
-      <a>Customer Name: <?php  echo $row['fullname']."  ".$row['surname']?></a>
-      <a>Email: <?php  echo $row['email']?></a>
-      <a>Mobile number: <?php  echo $row['mobile']?></a>
-      <a>Date of Birth: <?php  echo $row['dob']?></a>
-      <a>Account Type: Savings</a>
-    </div>
-  </div>
-  <div class="formcont">
-    <center>
-    <h3>Balance Amount</h3>
-    </center>
-    <div class="balanceamount">
-      <a>Account Number:&nbsp;&nbsp;<?php  echo $row['accountnum']?><br>
-      Balance amount: &nbsp;&nbsp;INR <?php echo $row2['balance']?>
-    </a>
-    <a onclick="alert('This feature is currently under process we will update soon!')">Add Amount at your nearby centers</a>
-    
-    </div>
-    <div class="social">
-      <center>
-      <h4>Contact us</h4>
-      <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-      <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-      <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-      </center>
-    </div>
-   
+  <div class="formsearch">
+  <h3>Search Benificiary</h3>
 
-  </div>
-  <div class="formloan">
-    <center>
-    <h4>Easy Home Loan<br>Apply through TSM Banking</h4>
-    <div class="customerservice">
-    <a href="#">Contact our Customer service</a><br>
-    <a href="#"><i class="fa fa-comment" aria-hidden="true"></i>&nbspChat with Customer care</a><br>
-    <a href="#"><i class="fa fa-id-card" aria-hidden="true"></i> Apply for Insurance</a>
+<input type="text" id="myInput" onkeyup="search()" placeholder="Search for names.." title="Type in a name">
 
-    <button>Click here</button>
-    </div>
-
-  </center>
-  </div>
-</div>
+<ul id="myUL">
+<?php
+        while($row4 = mysqli_fetch_assoc($sql4)){
+?>
+  <li><a id="myBtn"><?php echo $row4['fullname']?></a></li>
   
 
+  <?php
 
+        }
+        ?>
+       
+</ul>
+
+
+  </div>
 
 
 </body>
 <script src = "./banking.js">
+</script>
+<script>
+    function search() {
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName("li");
+  for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("a")[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+      } else {
+          li[i].style.display = "none";
+      }
+  }
+}
 </script>
 
 </html>
