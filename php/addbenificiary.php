@@ -64,7 +64,7 @@ if(isset($_POST['submit'])){
             <a href="#" class="company"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a> 
             <a href="./logout.php">Logout</a>
             <a href="./login.php"><?php echo $_SESSION['email'];?></a>
-            <a href="#about">About</a>
+            <a href="#" onclick="openAbout()">About</a>
             <a href="#contact">Contact</a>
             <a href="./home.php" class="active">Home</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -110,6 +110,25 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </section>
+<div id="about" class="about">
+    <a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="about-overlay">
+        <h1>About us</h1>
+        <p>TSM BANKING SYSTEM Launched in 2022, Our technology platform connects customers,<br> 
+        All banking needs at your finger tip. This application is developed by Tatikonda Sai Murahari <br>
+        Customers use our platform to fund transfer and check account balance, read and write customer 
+        data and to apply for Home loan,Insurance etc.,<br> visit our TSM banking system and enjoy our services at your finger tip<br> feel free to contact us through social media handles<br>
+    </div>
+</div>
+<script>
+    function openAbout(){
+  document.getElementById("about").style.width = "100%";
+
+}
+function closeNav(){
+  document.getElementById("about").style.width = "0%";
+}
+</script>
 
 <script src = "./banking.js">
 </script>

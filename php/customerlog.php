@@ -40,7 +40,7 @@ include "connection.php";
             <a href="#" class="company"><i class="fa fa-university" aria-hidden="true"></i>&nbspTSM Banking</a> 
             
             <a href="./home.php"><?php echo $_SESSION['email'];?></a>
-            <a href="#about">About</a>
+            <a href="#about" onclick="openAbout()">About</a>
             <a href="#contact">Contact</a>
             <a href="./home.php" class="active">Home</a>
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -138,12 +138,12 @@ Always “sign out” or “log off” of password protected websites when finis
   </center>
   </div>
 </div>
-  
-
-
-
 
 </body>
+
+
+
+
 <script src = "./banking.js">
 </script>
 
