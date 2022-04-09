@@ -131,6 +131,7 @@ Always “sign out” or “log off” of password protected websites when finis
     <a href="#">Contact our Customer service</a><br>
     <a href="#"><i class="fa fa-comment" aria-hidden="true"></i>&nbspChat with Customer care</a><br>
     <a href="#"><i class="fa fa-id-card" aria-hidden="true"></i> Apply for Insurance</a>
+    <a href="#" onclick="alert('Thank you, Your cheque book will be shipped shortly')"><i class="fa fa-id-card" aria-hidden="true"></i> Order Cheque Book</a>
 
     <button>Click here</button>
     </div>
